@@ -8,7 +8,7 @@
 
 - [Python 3.x](https://www.python.org/)
 - Chrome 浏览器
-- [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/)（自带的）
+- [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/)
 
 脚本理论上跨平台，但暂无其他操作系统的配置演示。
 
