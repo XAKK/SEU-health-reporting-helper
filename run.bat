@@ -1,0 +1,1 @@
+start cmd /K "cd /d %~dp0 && .\shrh-venv\Scripts\activate && python main.py && exit"
