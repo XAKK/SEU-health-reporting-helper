@@ -17,7 +17,7 @@
 ### 下载或 Clone 本仓库
 
 ```
-git clone https://github.com/XAKK/SEU-health-reporting-helper
+git clone https://github.com/XAKK/SEU-health-reporting-helper.git
 ```
 
 ### 下载 ChromeDriver
