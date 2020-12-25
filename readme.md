@@ -77,7 +77,7 @@ class Info:
 ├───personal_information.py
 ├───run.bat
 ├───readme.access/
-└───readme.md.
+└───readme.md
 ```
 
 ### 打卡
