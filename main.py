@@ -7,7 +7,7 @@ from selenium.webdriver import Chrome
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.chrome.options import Options
 
-from personal_infomation import Info
+from personal_information import Info
 
 class ReportingHelper:
     def __init__(self):

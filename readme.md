@@ -28,7 +28,7 @@ git clone https://github.com/XAKK/SEU-health-reporting-helper.git
 
 ### 新建配置文件
 
-在 `SEU-health-reporting-helper` 目录下，新建一个名为 `personal_infomation.py` 的文件，并写入下面的内容：
+在 `SEU-health-reporting-helper` 目录下，新建一个名为 `personal_information.py` 的文件，并写入下面的内容：
 
 ```python
 class Info:
