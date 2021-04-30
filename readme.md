@@ -22,7 +22,7 @@ git clone https://github.com/XAKK/SEU-health-reporting-helper.git
 
 ### 下载 ChromeDriver
 
-项目中的 ChromeDriver 对应了 Windows 平台 **89** 版本的 Chrome，若本机 Chrome 版本一致则可跳过此步。
+项目中的 ChromeDriver 对应了 Windows 平台 **90** 版本的 Chrome，若本机 Chrome 版本一致则可跳过此步。
 
 否则，下载与 Chome 浏览器版本相对应的 [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/)，并替换 SEU-health-reporting-helper 目录下 ChromeDriver。
 
