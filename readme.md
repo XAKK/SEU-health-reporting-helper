@@ -2,13 +2,17 @@
 
 这是一个健康申报自动化脚本，在正确配置之后，可以实现每日自动打卡，并通过邮件告知打卡结果。
 
+## 更新日志
+
+2021.11.04：更新 ChromeDriver 至 95。
+
 ## 前提
 
 下面的操作都在 Windows 10 的机器上执行。相关依赖有：
 
 - [Python 3.x](https://www.python.org/)
 - Chrome 浏览器
-- [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/)
+- [ChromeDriver](https://sites.google.com/chromium.org/driver/)
 
 脚本理论上跨平台，但暂无其他操作系统的配置演示。
 
@@ -22,9 +26,7 @@ git clone https://github.com/XAKK/SEU-health-reporting-helper.git
 
 ### 下载 ChromeDriver
 
-项目中的 ChromeDriver 对应了 Windows 平台 **90** 版本的 Chrome，若本机 Chrome 版本一致则可跳过此步。
-
-否则，下载与 Chome 浏览器版本相对应的 [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/)，并替换 SEU-health-reporting-helper 目录下 ChromeDriver。
+下载与本机 Chome 浏览器版本相对应的 ChromeDriver，并移动至 SEU-health-reporting-helper 目录下。
 
 ### 新建配置文件
 
