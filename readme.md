@@ -2,11 +2,13 @@
 
 这是一个健康申报自动化脚本，在正确配置之后，可以实现每日自动打卡，并通过邮件告知打卡结果。
 
+请平日自觉打卡，建议将自动打卡脚本作为兜底。**出现发烧等异常状况时，请务必在打卡脚本运行前手动申报健康状况**，以免造成信息错报。祝各位用户身体健康。
+
 ## 更新日志
 
 **2021.11.16：**
 
-1. 增加配置选项：是否需要通过邮件发送打卡结果的;
+1. 增加配置选项：是否需要通过邮件发送打卡结果;
 2. 增加配置选项：是否只有在打卡失败时进行通知。
 
 
@@ -34,9 +36,7 @@ git clone https://github.com/XAKK/SEU-health-reporting-helper.git
 
 ### 新建配置文件
 
-`personal_information_demo.py` 是演示配置文件，可以在此基础上修改。
-
-在 `SEU-health-reporting-helper` 目录下，新建一个名为 `personal_information.py` 的文件，并写入下面的内容：
+`personal_information_demo.py` 是演示配置文件，可以在此基础上修改。在 `SEU-health-reporting-helper` 目录下，新建一个名为 `personal_information.py` 的文件，并写入下面的内容：
 
 ```python
 class Info:
@@ -75,7 +75,7 @@ class Info:
 | `email_password`      | 发送打卡状态的邮箱密码                                       | `"******"`            |
 | `smtp_server`         | 发送打卡状态的邮箱的 smtp 服务器地址，对于东南大学邮箱，为 "mail.seu.edu.cn" | `"mail.example.com"`  |
 | `to_addr`             | 接收打卡状态的邮箱地址                                       | `"name2@example.com"` |
-| `user_id`             | 一卡通号（9位数）                                            | `"220xxxxxx"`         |
+| `user_id`             | 一卡通号（9 位数）                                           | `"220xxxxxx"`         |
 | `password`            | 登录网上办事大厅的密码                                       | `"******"`            |
 
 上面信息将保存在本地，不会发送给第三方，但仍建议在可信的环境部署。
@@ -156,5 +156,4 @@ run.bat
 
 ## 其他
 
-- 脚本理论上可跨平台运行，欢迎补充其他操作系统的配置方法。
 - 默认上报体温为 36.5 ℃。
