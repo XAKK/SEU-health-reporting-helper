@@ -24,7 +24,7 @@ class ReportingHelper:
         driver.find_element_by_id('password').send_keys(self.cfg.password)  # 密码
         driver.find_element_by_xpath('//*[@class="auth_login_btn primary full_width"]').click()        
 
-        status = "打卡失败"
+        status = "failed"
         try:
             WebDriverWait(driver, 30, 0.2).until(lambda x:x.find_element_by_xpath('//*[@class="bh-btn bh-btn-primary"]'))
             driver.find_element_by_xpath('//*[@class="bh-btn bh-btn-primary"]').click()
@@ -35,11 +35,16 @@ class ReportingHelper:
 
             WebDriverWait(driver, 30, 0.2).until(lambda x:x.find_element_by_xpath('//*[@class="bh-dialog-btn bh-bg-primary bh-color-primary-5"]'))
             driver.find_element_by_xpath('//*[@class="bh-dialog-btn bh-bg-primary bh-color-primary-5"]').click()
-            status = "打卡成功"
-        except:
+            status = "successful"
+        except: 
             pass
+        
+        if self.cfg.notification == "yes":
+            if self.cfg.notify_failure_only == "no":
+                self.send_email(status)
+            elif status == "failed":
+                self.send_email(status)
 
-        self.send_email(status)
         driver.close()
 
     def send_email(self, message):
