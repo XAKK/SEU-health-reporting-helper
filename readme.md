@@ -40,7 +40,15 @@ git clone https://github.com/XAKK/SEU-health-reporting-helper.git
 
 ```python
 class Info:
-    # 是否需要发送邮件（yes/no）
+    #################### 必填 ####################
+    # 学号（将 220000000 替换为您的一卡通号）
+    user_id = "220000000"
+
+    # 登录网上办事大厅的密码（将 ****** 替换为登录信息门户的密码）
+    password = "******"
+
+    #################### 可选 ####################
+    # 是否需要发送邮件通知打卡结果（yes/no）
     notification = "no"
 
     # 只有尝试打卡失败后，才发送邮件（yes/no）
@@ -52,31 +60,25 @@ class Info:
     # 发送打卡状态的邮箱密码（将 ****** 替换为您邮箱的密码）
     email_password = "******"
 
-    # 发送打卡状态的邮箱的 smtp 服务器地址。对于东南大学邮箱，为 "mail.seu.edu.cn"
-    smtp_server = "mail.seu.edu.cn"
+    # 发送打卡状态的邮箱的 smtp 服务器地址。对于东南大学邮箱，为 "smtp.seu.edu.cn"
+    smtp_server = "smtp.seu.edu.cn"
 
     # 接收打卡状态的邮箱地址
-    to_addr = "name2@example.com"
-
-    # 学号（将 220000000 替换为您的一卡通号）
-    user_id = "220000000"
-
-    # 登录网上办事大厅的密码（将 ****** 替换为登录信息门户的密码）
-    password = "******"
+    to_addr = "name@example.com"
 ```
 
 其中，根据自己实际，替换相关内容。各字段描述如下：
 
-| 变量名                | 描述                                                         | 样例                  |
-| --------------------- | ------------------------------------------------------------ | --------------------- |
-| `notification`        | 是否需要发送邮件通知打卡结果（yes/no），当为“no”时，除了 `user_id` 和 `passward` 外，其余变量值不再重要 | "yes"                 |
-| `notify_failure_only` | 只有尝试打卡失败后，才发送邮件（yes/no）                     | "yes"                 |
-| `from_addr`           | 发送打卡状态的邮箱地址，对于东南大学邮箱，一般为 "学号@seu.edu.cn" | `"name1@example.com"` |
-| `email_password`      | 发送打卡状态的邮箱密码                                       | `"******"`            |
-| `smtp_server`         | 发送打卡状态的邮箱的 smtp 服务器地址，对于东南大学邮箱，为 "mail.seu.edu.cn" | `"mail.example.com"`  |
-| `to_addr`             | 接收打卡状态的邮箱地址                                       | `"name2@example.com"` |
-| `user_id`             | 一卡通号（9 位数）                                           | `"220xxxxxx"`         |
-| `password`            | 登录网上办事大厅的密码                                       | `"******"`            |
+| 变量名                | 描述                                                         | 样例                 |
+| --------------------- | ------------------------------------------------------------ | -------------------- |
+| `notification`        | 是否需要发送邮件通知打卡结果（yes/no），当为“no”时，除了 `user_id` 和 `passward` 外，其余变量值不再重要 | "yes"                |
+| `notify_failure_only` | 只有尝试打卡失败后，才发送邮件（yes/no）                     | "yes"                |
+| `from_addr`           | 发送打卡状态的邮箱地址，对于东南大学邮箱，一般为 "学号@seu.edu.cn" | `"name@example.com"` |
+| `email_password`      | 发送打卡状态的邮箱密码                                       | `"******"`           |
+| `smtp_server`         | 发送打卡状态的邮箱的 smtp 服务器地址，对于东南大学邮箱，为 "smtp.seu.edu.cn" | `"smtp.example.com"` |
+| `to_addr`             | 接收打卡状态的邮箱地址                                       | `"name@example.com"` |
+| `user_id`             | 一卡通号（9 位数）                                           | `"220xxxxxx"`        |
+| `password`            | 登录网上办事大厅的密码                                       | `"******"`           |
 
 上面信息将保存在本地，不会发送给第三方，但仍建议在可信的环境部署。
 
