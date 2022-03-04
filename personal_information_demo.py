@@ -6,6 +6,9 @@ class Info:
     # 登录网上办事大厅的密码（将 ****** 替换为登录信息门户的密码）
     password = "******"
 
+    # chromedriver 可执行文件路径
+    chrome_driver_path = "/usr/bin/chromedriver"
+
     #################### 可选 ####################
     # 是否需要发送邮件通知打卡结果（yes/no）
     notification = "no"
@@ -24,3 +27,4 @@ class Info:
 
     # 接收打卡状态的邮箱地址
     to_addr = "name@example.com"
+

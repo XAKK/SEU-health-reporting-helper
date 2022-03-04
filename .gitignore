@@ -1,9 +1,10 @@
 .vscode/
+__pycache__/
 personal_information.py
 test.py
 notes.md
-__pycache__/
-debug.log
 shrh-venv
 temp*
-chromedriver.exe
+chromedriver*
+*.log
+trash-bin/

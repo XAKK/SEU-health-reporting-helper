@@ -1,0 +1,1 @@
+source /home/chuen/workspace/SEU-health-reporting-helper/shrh-venv/bin/activate && python3 /home/chuen/workspace/SEU-health-reporting-helper/main.py
