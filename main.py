@@ -6,8 +6,14 @@ from email.utils import parseaddr, formataddr
 from selenium.webdriver import Chrome
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.chrome.options import Options
+# from selenium.webdriver.chrome.service import Service
 
 from personal_information import Info
+
+# import os
+# from webdriver_manager.chrome import ChromeDriverManager
+
+# os.environ['WDM_LOCAL'] = '1'
 
 class ReportingHelper:
     def __init__(self):
@@ -17,6 +23,7 @@ class ReportingHelper:
         chrome_options = Options()
         chrome_options.add_argument('--headless') # 使用无头浏览器，不跳出窗口
         driver = Chrome(chrome_options=chrome_options)
+        # driver = Chrome(service=Service(ChromeDriverManager().install()), chrome_options=chrome_options)
 
         driver.get('https://newids.seu.edu.cn/authserver/login?service=http%3A%2F%2Fehall.seu.edu.cn%2Fqljfwapp2%2Fsys%2FlwReportEpidemicSeu%2Findex.do%3Ft_s%3D1594447890898%26amp_sec_version_%3D1%26gid_%3DSTZiVXZjRnhVSS9VNERWaFNNT1hXb2VNY3FHTHFVVHMwRC9jdTdhUlllcXVkZDNrKzNEV1ZxeHVwSEloRVQ4NHZFVzRDdHRTVlZ1dEIvczVvdzVpVGc9PQ%26EMAP_LANG%3Dzh%26THEME%3Dindigo%23%2FdailyReport')
         driver.maximize_window()
