@@ -43,4 +43,4 @@ RUN \
     # runtime related
     pip3 install -i https://mirrors.aliyun.com/pypi/simple/ -r requirements.txt
 
-CMD ["/bin/bash", "python3", "main.py"]
+CMD ["/bin/bash"]
