@@ -1,8 +1,10 @@
-import smtplib, time
+import smtplib, time, os
+import yaml
 from email.mime.text import MIMEText
 from email.header import Header
 from email.utils import parseaddr, formataddr
 from random import random
+
 from selenium.webdriver import Chrome
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.chrome.options import Options
@@ -13,7 +15,32 @@ from personal_information import Info
 
 class ReportingHelper:
     def __init__(self):
-        self.cfg = Info
+        config_file = "config.yml"
+
+        if os.path.exists(config_file):
+            # new style configuration
+            print("DEBUG: use new style configuration")
+            with open(config_file, "r") as f:
+                config = yaml.safe_load(f.read())
+
+            # when an item is missing, use default value.
+            class Config:
+                user_id = config.get("user_id")
+                password = config.get("password")
+                chrome_driver_path = config.get("chrome_driver_path", "/usr/bin/chromedriver")
+                notification = config.get("notification", "no")
+                notify_failure_only = config.get("notify_failure_only", "no")
+                from_addr = config.get("from_addr", "USER_NAME@seu.edu.cn")
+                email_password = config.get("email_password")
+                smtp_server = config.get("smtp_server", "smtp.seu.edu.cn")
+                to_addr = config.get("to_addr", "name@example.com")
+            
+            self.cfg = Config
+        else:
+            # old style configuration
+            print("Warning: Old styly config file (personal_information.py) will be deprecated in the future. \
+                Please use config file with yaml format.")
+            self.cfg = Info
 
     def _random_temp(self) -> float:
         """Generate random normal body temperature. [36.2, 36.7]

@@ -10,7 +10,8 @@
 
 **2022.03.05:**
 
-1. 正常体温数据随机化，取值范围为 [36.2, 36.7]。
+1. 正常体温数据随机化，取值范围为 [36.2, 36.7]；
+2. 配置文件格式切换至 yaml，老式配置文件（personal_information.py）支持暂时保留。
 
 **2022.03.04:**
 
@@ -35,43 +36,40 @@ git clone https://github.com/XAKK/SEU-health-reporting-helper.git
 
 ### 新建配置文件
 
-`personal_information_demo.py` 是演示配置文件，可以在此基础上修改。在 `SEU-health-reporting-helper` 目录下，新建一个名为 `personal_information.py` 的文件，并写入下面的内容：
+`config_demo.yml` 是演示配置文件，可以在此基础上修改。在 `SEU-health-reporting-helper` 目录下，新建一个名为 `config.yml` 的文件，并写入下面的内容，并根据实际情况，替换属性值字段。
 
-```python
-class Info:
-    #################### 必填 ####################
-    # 学号（将 220000000 替换为您的一卡通号）
-    user_id = "220000000"
+```yaml
+#################### 必填 ####################
+# 学号（将 220000000 替换为您的一卡通号）
+user_id: "220000000"
 
-    # 登录网上办事大厅的密码（将 ****** 替换为登录信息门户的密码）
-    password = "******"
+# 登录网上办事大厅的密码（将 ****** 替换为登录信息门户的密码）
+password: "******"
 
-    # chromedriver 可执行文件路径
-    chrome_driver_path = "/usr/bin/chromedriver"
+# chromedriver 可执行文件路径
+chrome_driver_path: "/usr/bin/chromedriver"
 
-    #################### 可选 ####################
-    # 是否需要发送邮件通知打卡结果（yes/no）
-    notification = "no"
+#################### 可选 ####################
+# 是否需要发送邮件通知打卡结果（yes/no）
+notification: "no"
 
-    # 只有尝试打卡失败后，才发送邮件（yes/no）
-    notify_failure_only = "no"
+# 只有尝试打卡失败后，才发送邮件（yes/no）
+notify_failure_only: "no"
 
-    # 发送打卡状态的邮箱地址。对于东南大学邮箱，为 "USER_NAME@seu.edu.cn"（将 USER_NAME 替换为您的域名）
-    from_addr = "USER_NAME@seu.edu.cn"
-  
-    # 发送打卡状态的邮箱密码（将 ****** 替换为您邮箱的密码）
-    email_password = "******"
+# 发送打卡状态的邮箱地址。对于东南大学邮箱，为 "USER_NAME@seu.edu.cn"（将 USER_NAME 替换为您的域名）
+from_addr: "USER_NAME@seu.edu.cn"
 
-    # 发送打卡状态的邮箱的 smtp 服务器地址。对于东南大学邮箱，为 "smtp.seu.edu.cn"
-    smtp_server = "smtp.seu.edu.cn"
+# 发送打卡状态的邮箱密码（将 ****** 替换为您邮箱的密码）
+email_password: "******"
 
-    # 接收打卡状态的邮箱地址
-    to_addr = "name@example.com"
+# 发送打卡状态的邮箱的 smtp 服务器地址。对于东南大学邮箱，为 "smtp.seu.edu.cn"
+smtp_server: "smtp.seu.edu.cn"
+
+# 接收打卡状态的邮箱地址
+to_addr: "name@example.com"
 
 
 ```
-
-其中，根据自己实际，替换相关内容。
 
 ### 新建虚拟环境与安装依赖
 

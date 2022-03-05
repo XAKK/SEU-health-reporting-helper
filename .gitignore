@@ -1,6 +1,7 @@
 .vscode/
 __pycache__/
 personal_information.py
+config.yml
 test.py
 notes.md
 shrh-venv
