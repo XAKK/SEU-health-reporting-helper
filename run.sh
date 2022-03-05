@@ -1,1 +1,2 @@
-source /path/to/SEU-health-reporting-helper/shrh-venv/bin/activate && python3 /path/to/workspace/SEU-health-reporting-helper/main.py
+WORKDIR="$( cd "$( dirname "$0"  )" && pwd  )"
+source ${WORKDIR}/shrh-venv/bin/activate && python3 ${WORKDIR}/main.py
