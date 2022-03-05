@@ -1,39 +1,14 @@
-# 东南大学健康打卡助手
+# 东南大学健康打卡助手 🚀
 
 这是一个健康申报自动化脚本，在正确配置之后，可以实现每日自动打卡，并通过邮件告知打卡结果。
 
-请平日自觉打卡，建议将自动打卡脚本作为兜底。**出现发烧等异常状况时，请务必在打卡脚本运行前手动申报健康状况**，以免造成信息错报。祝各位用户身体健康。
+请平日自觉打卡，建议将自动打卡脚本作为兜底。默认上报体温为 36.2 ℃ 至 36.7 ℃。⚠️ **出现发烧等异常状况时，请务必在打卡脚本运行前手动申报健康状况**，以免造成信息错报。
 
-默认上报体温为 36.2 ℃ 至 36.7 ℃。
+祝各位用户身体健康。😉
 
-## 更新日志
+## 快速上手（Docker）
 
-**2022.03.05:**
-
-1. 正常体温数据随机化，取值范围为 [36.2, 36.7]；
-2. 配置文件格式切换至 yaml，老式配置文件（personal_information.py）支持暂时保留;
-3. 增加对 Docker 的支持。
-
-**2022.03.04:**
-
-1. 增加对 Linux 的支持。
-
-**2021.11.16：**
-
-1. 增加配置选项：是否需要通过邮件发送打卡结果;
-2. 增加配置选项：是否只有在打卡失败时进行通知。
-
-## 快速上手（Windows）
-
-### 下载或 Clone 本仓库
-
-```
-git clone https://github.com/XAKK/SEU-health-reporting-helper.git
-```
-
-### 下载 ChromeDriver
-
-下载与本机 Chome 浏览器版本相对应的 ChromeDriver，并移动至 SEU-health-reporting-helper 目录下。
+推荐程度：⭐️⭐️⭐️⭐️⭐️
 
 ### 新建配置文件
 
@@ -71,6 +46,97 @@ to_addr: "name@example.com"
 
 
 ```
+
+### 新建镜像
+
+```bash
+cd SEU-health-reporting-helper
+docker build -t shrh:0.1 .
+```
+
+### 打卡
+
+```bash
+chmod +x run_docker.sh
+./run_docker.sh
+```
+
+### 配置每日自动打卡
+
+新建定时任务
+
+```bash
+crontab -e
+```
+
+新增下面的内容，将每天早上 8 点打卡（⚠️ 注意将 `/path/to/SEU-health-reporting-helper` 路径替换为实际项目路径）
+
+```
+* 8 * * * /path/to/SEU-health-reporting-helper/run_docker.sh
+```
+
+## 快速上手（Linux）
+
+推荐程度：⭐️⭐️⭐️
+
+### 下载 ChromeDriver
+
+自动根据 Chrome 版本，安装对应的 ChromeDriver 至 `/usr/bin`
+
+```bash
+./install_chromedriver.sh
+```
+
+### 新建配置文件
+
+参考前文，略。
+
+### 新建虚拟环境与安装依赖
+
+```bash
+python3 -m venv shrh-venv
+source shrh-venv/bin/activate
+pip install -r requirements.txt
+```
+
+### 打卡
+
+```bash
+chmod +x run.sh
+./run.sh
+```
+
+### 配置每日自动打卡
+
+借助 crontab，可实现自动打卡功能。
+
+新建定时任务
+
+```bash
+crontab -e
+```
+
+新增下面的内容，将每天早上 8 点打卡（⚠️ 注意将两个 `/path/to/SEU-health-reporting-helper` 路径替换为实际项目路径）
+
+```bash
+SHELL=/bin/bash
+PATH=/usr/local/bin/:/usr/bin:/usr/sbin
+* 8 * * * DISPLAY=:1 /path/to/SEU-health-reporting-helper/run.sh >> /path/to/SEU-health-reporting-helper/dailyReport.log 2>&1
+```
+
+## 快速上手（Windows）
+
+推荐程度：⭐️⭐️⭐️
+
+### 下载 ChromeDriver
+
+下载与本机 Chome 浏览器版本相对应的 ChromeDriver，并移动至 SEU-health-reporting-helper 目录下。
+
+你可能需要 [ChromeDriver 镜像站](https://registry.npmmirror.com/binary.html?path=chromedriver/)。后期升级 Chrome 需要替换对应的 ChromeDriver。
+
+### 新建配置文件
+
+参考前文，略。
 
 ### 新建虚拟环境与安装依赖
 
@@ -136,95 +202,19 @@ run.bat
 
 正常情况下，该任务**不会弹出控制台**，**用户未登录也能下自动执行**，**能够将打卡结果通过邮件发送**。
 
-## 快速上手（Docker）
+## 更新日志 📖
 
-### 下载或 Clone 本仓库
+**2022.03.05:**
 
-```
-git clone https://github.com/XAKK/SEU-health-reporting-helper.git
-```
+1. 正常体温数据随机化，取值范围为 [36.2, 36.7]；
+2. 配置文件格式切换至 yaml，老式配置文件（personal_information.py）支持暂时保留;
+3. 增加对 Docker 的支持。
 
-### 新建配置文件
+**2022.03.04:**
 
-参考前文，略。
+1. 增加对 Linux 的支持。
 
-### 新建镜像
+**2021.11.16：**
 
-```
-cd SEU-health-reporting-helper
-docker build -t shrh:0.1 .
-```
-
-### 打卡
-
-```
-chmod +x run_docker.sh
-./run_docker.sh
-```
-
-### 配置每日自动打卡
-
-新建定时任务
-
-```
-crontab -e
-```
-
-新增下面的内容，将每天早上 8 点打卡（注意将 `/path/to/SEU-health-reporting-helper` 路径替换为实际项目路径）
-
-```
-* 8 * * * /path/to/SEU-health-reporting-helper/run_docker.sh
-```
-
-## 快速上手（Linux）
-
-### 下载或 Clone 本仓库
-
-```
-git clone https://github.com/XAKK/SEU-health-reporting-helper.git
-```
-
-### 下载 ChromeDriver
-
-自动根据 Chrome 版本，安装对应的 ChromeDriver 至 `/usr/bin`
-
-```
-./install_chromedriver.sh
-```
-
-### 新建配置文件
-
-参考前文，略。
-
-### 新建虚拟环境与安装依赖
-
-```
-python3 -m venv shrh-venv
-source shrh-venv/bin/activate
-pip install -r requirements.txt
-```
-
-### 打卡
-
-```
-chmod +x run.sh
-./run.sh
-```
-
-### 配置每日自动打卡
-
-借助 crontab，可实现自动打卡功能。
-
-新建定时任务
-
-```
-crontab -e
-```
-
-新增下面的内容，将每天早上 8 点打卡（注意将两个 `/path/to/SEU-health-reporting-helper` 路径替换为实际项目路径）
-
-```
-SHELL=/bin/bash
-PATH=/usr/local/bin/:/usr/bin:/usr/sbin
-* 8 * * * DISPLAY=:1 /path/to/SEU-health-reporting-helper/run.sh >> /path/to/SEU-health-reporting-helper/dailyReport.log 2>&1
-```
+1. 增加配置选项：是否需要通过邮件发送打卡结果;
+2. 增加配置选项：是否只有在打卡失败时进行通知。
