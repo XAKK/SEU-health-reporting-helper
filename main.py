@@ -49,7 +49,7 @@ class ReportingHelper:
             float, normal body temperature
         """
         lb = 36.2
-        x = random(round(random() / 2, 1))  # [0, 0.5]
+        x = round(random() / 2, 1)  # [0, 0.5]
         return lb + x
 
     def run(self):
@@ -93,7 +93,7 @@ class ReportingHelper:
         driver.close()
         print(time.strftime("%Y-%m-%d %H:%M:%S -", time.localtime()), status)
 
-    def send_email(self, message):
+    def send_email(self, message:str):
         """Sand email to predefined mailbox.
 
         Args:
@@ -109,7 +109,7 @@ class ReportingHelper:
         server.sendmail(self.cfg.from_addr, [self.cfg.to_addr], msg.as_string())
         server.quit()
 
-    def _format_addr(self, s):
+    def _format_addr(self, s:str) -> str:
         """Formatting address.
 
         Args:
