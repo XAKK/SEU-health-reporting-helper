@@ -2,7 +2,7 @@ import smtplib, time
 from email.mime.text import MIMEText
 from email.header import Header
 from email.utils import parseaddr, formataddr
-
+from random import random
 from selenium.webdriver import Chrome
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.chrome.options import Options
@@ -15,9 +15,17 @@ class ReportingHelper:
     def __init__(self):
         self.cfg = Info
 
-    def run(self):
-        print("DEBUG0")
+    def _random_temp(self) -> float:
+        """Generate random normal body temperature. [36.2, 36.7]
 
+        Returns:
+            float, normal body temperature
+        """
+        lb = 36.2
+        x = random(round(random() / 2, 1))  # [0, 0.5]
+        return lb + x
+
+    def run(self):
         options = Options()
         options.add_argument("--headless") # headless browser
         options.add_argument("--no-sandbox")
@@ -29,12 +37,9 @@ class ReportingHelper:
             options = options
         )
 
-        print("DEBUG1")
         driver.get('https://newids.seu.edu.cn/authserver/login?service=http%3A%2F%2Fehall.seu.edu.cn%2Fqljfwapp2%2Fsys%2FlwReportEpidemicSeu%2Findex.do%3Ft_s%3D1594447890898%26amp_sec_version_%3D1%26gid_%3DSTZiVXZjRnhVSS9VNERWaFNNT1hXb2VNY3FHTHFVVHMwRC9jdTdhUlllcXVkZDNrKzNEV1ZxeHVwSEloRVQ4NHZFVzRDdHRTVlZ1dEIvczVvdzVpVGc9PQ%26EMAP_LANG%3Dzh%26THEME%3Dindigo%23%2FdailyReport')
         driver.find_element(By.ID, 'username').send_keys(self.cfg.user_id)  # student ID
-
         driver.find_element(By.ID, 'password').send_keys(self.cfg.password)  # password
-
         driver.find_element(By.XPATH, '//*[@class="auth_login_btn primary full_width"]').click()
 
         status = ""
@@ -42,7 +47,7 @@ class ReportingHelper:
             WebDriverWait(driver, 15, 0.2).until(lambda x:x.find_element(By.XPATH, '//*[@class="bh-btn bh-btn-primary"]'))
             driver.find_element(By.XPATH, '//*[@class="bh-btn bh-btn-primary"]').click()
             WebDriverWait(driver, 15, 0.2).until(lambda x:x.find_element(By.NAME, 'DZ_JSDTCJTW'))
-            driver.find_element(By.NAME, 'DZ_JSDTCJTW').send_keys('36.5')
+            driver.find_element(By.NAME, 'DZ_JSDTCJTW').send_keys(str(self._random_temp()))
             driver.find_element(By.ID, 'save').click()
 
             WebDriverWait(driver, 15, 0.2).until(lambda x:x.find_element(By.XPATH, '//*[@class="bh-dialog-btn bh-bg-primary bh-color-primary-5"]'))
@@ -59,7 +64,7 @@ class ReportingHelper:
                 self.send_email(status)
 
         driver.close()
-        print(time.strftime("%Y-%m-%d %H:%M:%S - ", time.localtime()), status)
+        print(time.strftime("%Y-%m-%d %H:%M:%S -", time.localtime()), status)
 
     def send_email(self, message):
         """Sand email to predefined mailbox.
@@ -92,6 +97,6 @@ class ReportingHelper:
 
 
 if __name__ == '__main__':
-    print(time.strftime("%Y-%m-%d %H:%M:%S - ", time.localtime()), "start")
+    print(time.strftime("%Y-%m-%d %H:%M:%S -", time.localtime()), "start")
     rh = ReportingHelper()
     rh.run()
