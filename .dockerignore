@@ -1,0 +1,9 @@
+.vscode/
+__pycache__/
+test.py
+notes.md
+shrh-venv
+temp*
+chromedriver*
+*.log
+trash-bin/

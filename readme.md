@@ -11,11 +11,12 @@
 **2022.03.05:**
 
 1. 正常体温数据随机化，取值范围为 [36.2, 36.7]；
-2. 配置文件格式切换至 yaml，老式配置文件（personal_information.py）支持暂时保留。
+2. 配置文件格式切换至 yaml，老式配置文件（personal_information.py）支持暂时保留;
+3. 增加对 Docker 的支持。
 
 **2022.03.04:**
 
-1. 增加对 Ubuntu 的支持。
+1. 增加对 Linux 的支持。
 
 **2021.11.16：**
 
@@ -135,7 +136,47 @@ run.bat
 
 正常情况下，该任务**不会弹出控制台**，**用户未登录也能下自动执行**，**能够将打卡结果通过邮件发送**。
 
-## 快速上手（Ubuntu）
+## 快速上手（Docker）
+
+### 下载或 Clone 本仓库
+
+```
+git clone https://github.com/XAKK/SEU-health-reporting-helper.git
+```
+
+### 新建配置文件
+
+参考前文，略。
+
+### 新建镜像
+
+```
+cd SEU-health-reporting-helper
+docker build -t shrh:0.1 .
+```
+
+### 打卡
+
+```
+chmod +x run_docker.sh
+./run_docker.sh
+```
+
+### 配置每日自动打卡
+
+新建定时任务
+
+```
+crontab -e
+```
+
+新增下面的内容，将每天早上 8 点打卡（注意将 `/path/to/SEU-health-reporting-helper` 路径替换为实际项目路径）
+
+```
+* 8 * * * /path/to/SEU-health-reporting-helper/run_docker.sh
+```
+
+## 快速上手（Linux）
 
 ### 下载或 Clone 本仓库
 
@@ -153,7 +194,7 @@ git clone https://github.com/XAKK/SEU-health-reporting-helper.git
 
 ### 新建配置文件
 
-同前文 Windows 部分。
+参考前文，略。
 
 ### 新建虚拟环境与安装依赖
 
@@ -170,7 +211,7 @@ chmod +x run.sh
 ./run.sh
 ```
 
-## 配置每日自动打卡
+### 配置每日自动打卡
 
 借助 crontab，可实现自动打卡功能。
 

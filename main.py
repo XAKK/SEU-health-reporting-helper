@@ -57,6 +57,7 @@ class ReportingHelper:
         options.add_argument("--headless") # headless browser
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-gpu")
+        options.add_argument('--disable-dev-shm-usage')  
 
 
         driver = Chrome(
