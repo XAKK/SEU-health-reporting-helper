@@ -19,7 +19,7 @@ class ReportingHelper:
 
         if os.path.exists(config_file):
             # new style configuration
-            print("DEBUG: use new style configuration")
+            # print("DEBUG: use new style configuration")
             with open(config_file, "r") as f:
                 config = yaml.safe_load(f.read())
 
@@ -42,15 +42,15 @@ class ReportingHelper:
                 Please use config file with yaml format.")
             self.cfg = Info
 
-    def _random_temp(self) -> float:
+    def _random_temp(self) -> str:
         """Generate random normal body temperature. [36.2, 36.7]
 
         Returns:
-            float, normal body temperature
+            normal body temperature
         """
         lb = 36.2
-        x = round(random() / 2, 1)  # [0, 0.5]
-        return lb + x
+        x = random() / 2  # [0, 0.5]
+        return str(round(lb + x, 1))
 
     def run(self):
         options = Options()
@@ -58,7 +58,6 @@ class ReportingHelper:
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-gpu")
         options.add_argument('--disable-dev-shm-usage')  
-
 
         driver = Chrome(
             service = Service(self.cfg.chrome_driver_path),
@@ -75,9 +74,8 @@ class ReportingHelper:
             WebDriverWait(driver, 15, 0.2).until(lambda x:x.find_element(By.XPATH, '//*[@class="bh-btn bh-btn-primary"]'))
             driver.find_element(By.XPATH, '//*[@class="bh-btn bh-btn-primary"]').click()
             WebDriverWait(driver, 15, 0.2).until(lambda x:x.find_element(By.NAME, 'DZ_JSDTCJTW'))
-            driver.find_element(By.NAME, 'DZ_JSDTCJTW').send_keys(str(self._random_temp()))
+            driver.find_element(By.NAME, 'DZ_JSDTCJTW').send_keys(self._random_temp())
             driver.find_element(By.ID, 'save').click()
-
             WebDriverWait(driver, 15, 0.2).until(lambda x:x.find_element(By.XPATH, '//*[@class="bh-dialog-btn bh-bg-primary bh-color-primary-5"]'))
             driver.find_element(By.XPATH, '//*[@class="bh-dialog-btn bh-bg-primary bh-color-primary-5"]').click()
             status = "successful"
